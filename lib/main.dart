@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -26,24 +27,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-       
         child: Column(
-         
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'Welcome to the CryptoApp',
             ),
-            
           ],
         ),
       ),
