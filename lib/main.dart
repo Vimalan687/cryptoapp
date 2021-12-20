@@ -1,3 +1,6 @@
+import 'package:cryptoapp/features/bottomNavigationBar.dart';
+import 'package:cryptoapp/features/drawer.dart';
+import 'package:cryptoapp/features/trendingCoins.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'CryptoApp - Mobile'),
+          primarySwatch: Colors.indigo, bottomAppBarColor: Colors.black),
+      home: MyHomePage(title: 'MilkyWay'),
     );
   }
 }
@@ -30,25 +32,32 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      // APPBAR below here
       appBar: AppBar(
+        centerTitle: true,
+        elevation: 10.0,
+        shadowColor: Colors.black,
         title: Text(widget.title),
       ),
+      // DRAWER below here
+      drawer: Drawer(
+        child: drawer(),
+      ),
+      //BODY below here
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            trendingCoins(),
             Text(
               'Welcome to the CryptoApp',
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.message),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      // BOTTOMNAVIGATIONBAR below here
+      bottomNavigationBar: bottomNavigationBar(),
+    ); // This trailing comma makes auto-formatting nicer for build methods.
+    // ignore: dead_code
   }
 }
