@@ -29,11 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //BODY below here
       body: Center(
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Divider(
-              height: 5,
-            ),
             trendingCoins(),
             Text(
               'Welcome to the CryptoApp',

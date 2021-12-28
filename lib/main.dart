@@ -11,7 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.indigo, bottomAppBarColor: Colors.black),
+        primarySwatch: Colors.indigo,
+        bottomAppBarColor: Colors.black,
+      ),
       home: MyHomePage(title: 'MilkyWay'),
     );
   }
