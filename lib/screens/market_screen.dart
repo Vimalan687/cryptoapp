@@ -15,7 +15,7 @@ class marketScreen extends StatefulWidget {
 class _marketScreenState extends State<marketScreen> {
   fetchAllCoins() async {
     var url = await get(Uri.parse(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&sparkline=false"));
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=250&order=market_cap_desc&sparkline=false"));
     return json.decode(url.body);
   }
 
@@ -37,10 +37,35 @@ class _marketScreenState extends State<marketScreen> {
                       color: Colors.grey[700],
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
-                    child: Text(
-                      "${snapshot.data[index]["name"]}",
+                      child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
+                          child: Image.network(
+                            snapshot.data[index]["image"],
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "${snapshot.data[index]["name"]} (${snapshot.data[index]["symbol"].toUpperCase()})",
+                            ),
+                            Text(
+                              "\$${snapshot.data[index]["current_price"]}",
+                            ),
+                          ],
+                        ),
+                        priceChangeEvaluator(
+                          snapshot.data[index]["price_change_24h"],
+                        ), // priceChangeEvaluator
+                      ],
                     ),
-                  ),
+                  )),
                 ),
               );
             },
@@ -52,5 +77,35 @@ class _marketScreenState extends State<marketScreen> {
         }
       },
     );
+  }
+
+  priceChangeEvaluator(var d) {
+    if (d == null) {
+      return Container(
+        child: Text("NaN"),
+      );
+    } else {
+      if (d < 0) {
+        return Container(
+          child: Text(
+            "${d.toStringAsFixed(2)}",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      } else {
+        return Container(
+          child: Text(
+            "${d.toStringAsFixed(2)}",
+            style: TextStyle(
+              color: Colors.greenAccent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      }
+    }
   }
 }
