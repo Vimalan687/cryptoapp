@@ -1,4 +1,4 @@
-import 'package:cryptoapp/screens/home_screen.dart';
+import 'package:cryptoapp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.indigo, bottomAppBarColor: Colors.black),
+      theme: ThemeData.dark(),
       home: MyHomePage(title: 'MilkyWay'),
     );
   }
