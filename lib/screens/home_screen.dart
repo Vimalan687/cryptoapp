@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cryptoapp/features/news.dart';
 import 'package:cryptoapp/features/trendingCoins.dart';
 import 'package:flutter/material.dart';
 
@@ -17,23 +18,26 @@ class _homeScreenState extends State<homeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: Colors.amber.withOpacity(0.5)
-                // image: DecorationImage(
-                //     image: NetworkImage(
-                //       "https://previews.123rf.com/images/lishchyshyn/lishchyshyn1904/lishchyshyn190400512/121588471-struktur-der-netzwerkverbindung-abstrakter-technologiehintergrund-futuristischer-hintergrund-digital.jpg?fj=1",
-                //     ),
-                //     fit: BoxFit.fitWidth),
-                ),
-            child: Center(
-              child: Text(
-                "Trending Coins",
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-          ),
+          sectionTitle("Trending Coins"),
           trendingCoins(),
+          sectionTitle("News"),
+          newsContainer(),
         ],
+      ),
+    );
+  }
+
+  sectionTitle(String title) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      alignment: Alignment.topLeft,
+      decoration: BoxDecoration(color: Colors.transparent),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 30,
+          color: Colors.amber,
+        ),
       ),
     );
   }
