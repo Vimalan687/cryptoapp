@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:convert';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -29,59 +30,38 @@ class _trendingCoinsState extends State<trendingCoins> {
         if (snapshot.hasData) {
           return CarouselSlider.builder(
             options: CarouselOptions(
+              scrollDirection: Axis.vertical,
               height: 120,
               autoPlay: true,
               pauseAutoPlayOnTouch: true,
             ),
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index, int pageViewIndex) =>
-                Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 1.0, vertical: 10.0),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border(
-                    left: BorderSide(color: Colors.blueGrey, width: 0.5),
-                    right: BorderSide(color: Colors.blueGrey, width: 0.5)),
-              ),
-              child: InkWell(
-                onTap: () {
-                  // Goes to Details Page
-                },
-                child: Container(
-                  child: ListTile(
-                    leading: Image.network(
-                      snapshot.data[index]["item"]["large"],
-                    ),
-                    title: Shimmer.fromColors(
-                      baseColor: Colors.white,
-                      highlightColor: Colors.grey,
-                      child: Text(
-                        '${snapshot.data[index]["item"]["name"]} (${snapshot.data[index]["item"]["symbol"]})',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                Stack(
+              children: [
+                Image.network(
+                  "https://previews.123rf.com/images/lishchyshyn/lishchyshyn1904/lishchyshyn190400512/121588471-struktur-der-netzwerkverbindung-abstrakter-technologiehintergrund-futuristischer-hintergrund-digital.jpg?fj=1",
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                ClipRRect(
+                  // Clip it cleanly.
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.blueGrey, width: 1),
                         ),
                       ),
-                    ),
-                    subtitle: Shimmer.fromColors(
-                      baseColor: Colors.white,
-                      highlightColor: Colors.grey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Rank: ${snapshot.data[index]["item"]["market_cap_rank"]}',
-                          ),
-                          Text(
-                            'Price in BTC: ${snapshot.data[index]["item"]["price_btc"]}',
-                          )
-                        ],
-                      ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 1.0, vertical: 5.0),
+                      alignment: Alignment.center,
+                      child: trendingCoinViewer(snapshot, index),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           );
         } else {
@@ -92,4 +72,53 @@ class _trendingCoinsState extends State<trendingCoins> {
       },
     );
   }
+}
+
+trendingCoinViewer(AsyncSnapshot snapshot, int index) {
+  return InkWell(
+    onTap: () {
+      // Goes to Details Page
+    },
+    child: Container(
+      child: ListTile(
+        leading: Image.network(
+          snapshot.data[index]["item"]["large"],
+        ),
+        title: Shimmer.fromColors(
+          baseColor: Colors.white,
+          highlightColor: Colors.grey,
+          child: Text(
+            '${snapshot.data[index]["item"]["name"]} (${snapshot.data[index]["item"]["symbol"]})',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+        ),
+        subtitle: Shimmer.fromColors(
+          baseColor: Colors.white,
+          highlightColor: Colors.yellow,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Rank: ${snapshot.data[index]["item"]["market_cap_rank"]}',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Price in BTC: ${snapshot.data[index]["item"]["price_btc"]}',
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }
