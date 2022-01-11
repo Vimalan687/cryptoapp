@@ -26,46 +26,58 @@ class newsContainer extends StatelessWidget {
                   pauseAutoPlayOnTouch: true,
                 ),
                 itemCount: snapshot.data.length,
-                itemBuilder:
-                    (BuildContext context, int index, int pageViewIndex) =>
-                        InkWell(
-                          onTap: () {
-                            launch(
-                              snapshot.data[index]["url"],
-                            );
-                          },
-                          child: Card(
-                            elevation: 20,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 10, 15, 2),
-                              child: Container(
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Image.network(
-                                          snapshot.data[index]['imageurl'],
-                                          height: 120,
-                                          fit: BoxFit.fitWidth),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      snapshot.data[index]["title"],
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                itemBuilder: (BuildContext context, int index,
+                        int pageViewIndex) =>
+                    InkWell(
+                      onTap: () {
+                        launch(
+                          snapshot.data[index]["url"],
+                        );
+                      },
+                      child: Card(
+                        elevation: 20,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.purple,
+                                Colors.pink,
+                              ],
                             ),
                           ),
-                        ));
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Image.network(
+                                    snapshot.data[index]['imageurl'],
+                                    height: 80,
+                                    fit: BoxFit.fitWidth),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 10, 15, 2),
+                                child: RichText(
+                                  maxLines: 4,
+                                  overflow: TextOverflow.clip,
+                                  strutStyle: StrutStyle(fontSize: 20.0),
+                                  text: TextSpan(
+                                    style: TextStyle(color: Colors.white),
+                                    text: snapshot.data[index]["title"],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ));
           }
           return Center(
             child: CircularProgressIndicator(),

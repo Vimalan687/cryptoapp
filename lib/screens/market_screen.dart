@@ -1,10 +1,9 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:convert';
-
+import 'package:cryptoapp/features/coinSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:searchfield/searchfield.dart';
 
 class marketScreen extends StatefulWidget {
   const marketScreen({Key? key}) : super(key: key);
@@ -29,22 +28,33 @@ class _marketScreenState extends State<marketScreen> {
           return Column(
             children: [
               Expanded(
-                flex: 1,
-                child: SearchField(
-                  suggestions: [
-                    'United States',
-                    'America',
-                    'Washington',
-                    'India',
-                    'Paris',
-                    'Jakarta',
-                    'Australia',
-                    'Lorem Ipsum'
+                flex: 3,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        width: 10,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 7,
+                      child: Container(
+                        child: searchCoins(),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.search),
+                      ),
+                    ),
                   ],
                 ),
               ),
               Expanded(
-                flex: 8,
+                flex: 17,
                 child: ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -86,7 +96,8 @@ class _marketScreenState extends State<marketScreen> {
                                   ],
                                 ),
                                 priceChangeEvaluator(
-                                  snapshot.data[index]["price_change_24h"],
+                                  snapshot.data[index]
+                                      ["price_change_percentage_24h"],
                                 ), // priceChangeEvaluator
                               ],
                             ),

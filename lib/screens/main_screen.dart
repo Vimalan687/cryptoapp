@@ -44,7 +44,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //BODY below here
       body: Center(
-        child: _pageScreens.elementAt(_selectedIndex),
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Image.network(
+                'https://www.icegif.com/wp-content/uploads/2021/10/icegif-1641.gif',
+                fit: BoxFit.fill,
+              ),
+            ),
+            _pageScreens.elementAt(_selectedIndex)
+          ],
+        ),
       ),
       // BOTTOMNAVIGATIONBAR below here
       bottomNavigationBar: BottomNavigationBar(
