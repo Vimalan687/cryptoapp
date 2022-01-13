@@ -47,12 +47,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height,
-              child: Image.network(
-                'https://www.icegif.com/wp-content/uploads/2021/10/icegif-1641.gif',
-                fit: BoxFit.fill,
-              ),
-            ),
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.purple.shade800,
+                    Colors.pink,
+                    Colors.pink.shade200,
+                  ],
+                )),
+                child: null),
             _pageScreens.elementAt(_selectedIndex)
           ],
         ),

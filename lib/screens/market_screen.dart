@@ -59,7 +59,12 @@ class _marketScreenState extends State<marketScreen> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(
+                        top: 2,
+                        bottom: 2,
+                        left: 8,
+                        right: 8,
+                      ),
                       elevation: 5,
                       child: InkWell(
                         onTap: () {

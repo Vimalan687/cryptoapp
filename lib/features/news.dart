@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:convert';
+import 'package:cryptoapp/features/monthString.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -34,42 +35,63 @@ class newsContainer extends StatelessWidget {
                           snapshot.data[index]["url"],
                         );
                       },
-                      child: Card(
-                        elevation: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.purple,
-                                Colors.pink,
-                              ],
-                            ),
+                            color: Colors.white.withOpacity(0.2),
+
+                            // color: const Color(0xFF0E3311).withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25),
+                                  topRight: Radius.circular(25),
+                                ),
                                 child: Image.network(
-                                    snapshot.data[index]['imageurl'],
-                                    height: 80,
-                                    fit: BoxFit.fitWidth),
+                                  snapshot.data[index]['imageurl'],
+                                  fit: BoxFit.fitWidth,
+                                  width: double.infinity,
+                                  height: 110,
+                                ),
                               ),
-                              SizedBox(
-                                height: 10,
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, top: 8.0),
+                                  child: Text(
+                                    dateFormater(
+                                        snapshot.data[index]['published_on']),
+                                  ),
+                                ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 10, 15, 2),
-                                child: RichText(
-                                  maxLines: 4,
-                                  overflow: TextOverflow.clip,
-                                  strutStyle: StrutStyle(fontSize: 20.0),
-                                  text: TextSpan(
-                                    style: TextStyle(color: Colors.white),
-                                    text: snapshot.data[index]["title"],
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  right: 8.0,
+                                  top: 5.0,
+                                ),
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    snapshot.data[index]['title'],
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: Text(
+                                    "- ${snapshot.data[index]['source']}",
                                   ),
                                 ),
                               ),
@@ -80,8 +102,19 @@ class newsContainer extends StatelessWidget {
                     ));
           }
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.amber,
+            ),
           );
         });
+  }
+
+  String dateFormater(date) {
+    var postTime = DateTime.fromMillisecondsSinceEpoch(date * 1000);
+    var parsedPostTime = DateTime.parse(postTime.toString());
+
+    var dateString =
+        '${monthString(parsedPostTime.month)} ${parsedPostTime.day}, ${parsedPostTime.year}';
+    return "Posted on $dateString";
   }
 }

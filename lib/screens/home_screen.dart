@@ -38,7 +38,8 @@ class _homeScreenState extends State<homeScreen> {
         title,
         style: TextStyle(
           fontSize: 30,
-          color: Colors.amber,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
