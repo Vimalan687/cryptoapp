@@ -44,7 +44,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //BODY below here
       body: Center(
-        child: _pageScreens.elementAt(_selectedIndex),
+        child: Stack(
+          children: [
+            Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.purple.shade800,
+                    Colors.pink,
+                    Colors.pink.shade200,
+                  ],
+                )),
+                child: null),
+            _pageScreens.elementAt(_selectedIndex)
+          ],
+        ),
       ),
       // BOTTOMNAVIGATIONBAR below here
       bottomNavigationBar: BottomNavigationBar(

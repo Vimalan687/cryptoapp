@@ -1,8 +1,10 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cryptoapp/features/coinSearch.dart';
 import 'package:cryptoapp/features/news.dart';
 import 'package:cryptoapp/features/trendingCoins.dart';
 import 'package:flutter/material.dart';
+import 'package:searchfield/searchfield.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({Key? key}) : super(key: key);
@@ -36,7 +38,8 @@ class _homeScreenState extends State<homeScreen> {
         title,
         style: TextStyle(
           fontSize: 30,
-          color: Colors.amber,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

@@ -13,7 +13,7 @@ class _profileScreenState extends State<profileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("This is the profile page"),
+      child: Center(child: Text("This is the profile page")),
     );
   }
 }

@@ -39,9 +39,8 @@ class _trendingCoinsState extends State<trendingCoins> {
             itemBuilder: (BuildContext context, int index, int pageViewIndex) =>
                 Stack(
               children: [
-                Image.network(
-                  "https://previews.123rf.com/images/lishchyshyn/lishchyshyn1904/lishchyshyn190400512/121588471-struktur-der-netzwerkverbindung-abstrakter-technologiehintergrund-futuristischer-hintergrund-digital.jpg?fj=1",
-                  fit: BoxFit.cover,
+                Container(
+                  color: Colors.purple[700],
                   width: MediaQuery.of(context).size.width,
                 ),
                 ClipRRect(

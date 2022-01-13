@@ -13,7 +13,7 @@ class _favouritesScreenState extends State<favouritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("This is the Favourites page"),
+      child: Center(child: Text("This is the Favourites page")),
     );
   }
 }
