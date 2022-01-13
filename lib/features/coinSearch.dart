@@ -46,16 +46,20 @@ class _searchCoinsState extends State<searchCoins> {
     TextEditingController selectedCoin = new TextEditingController();
 
     return SearchField(
-      marginColor: Colors.purple,
-      controller: selectedCoin,
-      suggestions: coins,
-      maxSuggestionsInViewPort: 5,
-      onTap: (selectedCoin) => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const detailsPage(),
-        ),
-      ),
-    );
+        marginColor: Colors.purple,
+        controller: selectedCoin,
+        suggestions: coins,
+        maxSuggestionsInViewPort: 5,
+        onTap: (selectedCoin) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const detailsPage(),
+            ),
+          );
+          setState(() {
+            selectedCoin = "";
+          });
+        });
   }
 }
