@@ -1,3 +1,4 @@
+import 'package:cryptoapp/Authorization/auth_helper.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -40,7 +41,7 @@ class drawer extends StatelessWidget {
         // Log Out button here
         TextButton(
             onPressed: () {
-              // What happens after pressing "Log Out"
+                  AuthHelper().logOut();
             },
             child: Text("Log Out"))
       ],
